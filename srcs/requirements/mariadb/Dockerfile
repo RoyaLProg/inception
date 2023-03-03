@@ -1,5 +1,5 @@
-FROM alpine
+FROM debian
 
-RUN apk update && apk upgrade
-RUN apk add mariadb mariadb-client
+RUN apt update && apt upgrade
+RUN apt install mariadb mariadb-client
 CMD ["mysqld", "--user=root", "--console"]
