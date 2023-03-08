@@ -13,4 +13,5 @@ RUN mkdir -p /var/www/html/\
 	&& cp wp-config-sample.php wp-config.php
 
 RUN /etc/init.d/php7.4-fpm start
+EXPOSE 9000
 CMD /usr/sbin/php-fpm7.4 -F
