@@ -1,5 +1,8 @@
 FROM debian
 
-RUN apt update && apt upgrade
-RUN apt install nginx
-CMD ["mysqld", "--user=root", "--console"]
+RUN apt-get update && apt-get upgrade
+RUN apt-get -y install nginx
+RUN apt-get -y install openssl
+RUN service nginx start
+CMD ["nginx", "-g", "daemon off;"]
+

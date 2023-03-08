@@ -1,0 +1,24 @@
+services:
+  db:
+    container_name: mariadb
+    env_file:
+      - ./srcs/.env
+    build: ./srcs/requirements/mariadb
+    networks: 
+      - inception
+  nginx:
+    container_name: nginx
+    build: ./srcs/requirements/nginx
+    networks:
+      - inception
+  wordpress:
+    container_name: wordpress
+    env_file:
+      - ./srcs/.env
+    build: ./srcs/requirements/wordpress
+    networks:
+      - inception
+
+networks:
+  inception:
+    driver: bridge
