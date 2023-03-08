@@ -13,6 +13,8 @@ services:
     build: ./srcs/requirements/nginx
     networks:
       - inception
+    volumes:
+      - wpdata:/var/www/html/wordpress
   wordpress:
     container_name: wordpress
     env_file:
