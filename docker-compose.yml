@@ -6,6 +6,8 @@ services:
     build: ./srcs/requirements/mariadb
     networks: 
       - inception
+    volumes:
+      - dbdata:/var/lib/mysql/wordpress_db
   nginx:
     container_name: nginx
     build: ./srcs/requirements/nginx
@@ -18,7 +20,23 @@ services:
     build: ./srcs/requirements/wordpress
     networks:
       - inception
+    volumes:
+      - wpdata:/var/www/html/wordpress
 
 networks:
   inception:
     driver: bridge
+
+volumes:
+  wpdata:
+     driver: local
+     driver_opts:
+      type: none
+      o: bind
+      device: /home/royal/data/wordpress
+  dbdata:
+     driver: local
+     driver_opts:
+      type: none
+      o: bind
+      device: /home/royal/data/mariadb
