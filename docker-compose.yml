@@ -8,6 +8,10 @@ services:
       - inception
     volumes:
       - dbdata:/var/lib/mysql/wordpress_db
+    healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            timeout: 20s
+            retries: 10
   nginx:
     container_name: nginx
     build: ./srcs/requirements/nginx
@@ -24,6 +28,9 @@ services:
       - inception
     volumes:
       - wpdata:/var/www/html/wordpress
+    depends_on:
+      db:
+        condition: service_healthy
 
 networks:
   inception:
