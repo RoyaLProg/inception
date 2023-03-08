@@ -19,6 +19,8 @@ services:
       - inception
     volumes:
       - wpdata:/var/www/html/wordpress
+    ports:
+      - "8080:443"
   wordpress:
     container_name: wordpress
     env_file:
