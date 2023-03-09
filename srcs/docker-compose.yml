@@ -1,20 +1,20 @@
 services:
-  db:
+  mariadb:
     container_name: mariadb
     env_file:
-      - ./srcs/.env
-    build: ./srcs/requirements/mariadb
+      - .env
+    build: requirements/mariadb
     networks: 
       - inception
     volumes:
-      - dbdata:/var/lib/mysql/wordpress_db
+      - dbdata:/var/lib/mysql/
     healthcheck:
             test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
             timeout: 20s
             retries: 10
   nginx:
     container_name: nginx
-    build: ./srcs/requirements/nginx
+    build: requirements/nginx
     networks:
       - inception
     volumes:
@@ -26,14 +26,14 @@ services:
   wordpress:
     container_name: wordpress
     env_file:
-      - ./srcs/.env
-    build: ./srcs/requirements/wordpress
+      - .env
+    build: requirements/wordpress
     networks:
       - inception
     volumes:
       - wpdata:/var/www/html/wordpress
     depends_on:
-      db:
+      mariadb:
         condition: service_healthy
 
 networks:
@@ -46,10 +46,10 @@ volumes:
      driver_opts:
       type: none
       o: bind
-      device: /home/royal/data/wordpress
+      device: $HOME/data/wordpress
   dbdata:
      driver: local
      driver_opts:
       type: none
       o: bind
-      device: /home/royal/data/mariadb
+      device: $HOME/data/mariadb
