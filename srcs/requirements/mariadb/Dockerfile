@@ -8,4 +8,4 @@ RUN service mariadb start
 RUN chmod +x /entry-point.d/startup.sh && chmod +x /entry-point.d/setup_wordpress.sql
 EXPOSE 3306
 ENTRYPOINT [ "/entry-point.d/startup.sh" ]
-CMD mysqld --console
+CMD mysqld --console --bind-address=0.0.0.0

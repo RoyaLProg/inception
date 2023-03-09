@@ -9,7 +9,6 @@ RUN openssl req -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
 -out /etc/nginx/ssl/ccambium.pem \
 -keyout /etc/nginx/ssl/ccambium.key \
 -subj "/C=FR/ST=Paris/L=Paris/O=42Paris/OU=ccambium/CN=ccambium/"
-# RUN service nginx start
 EXPOSE 443
 CMD ["nginx", "-g", "daemon off;"]
 

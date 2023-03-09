@@ -4,6 +4,7 @@ RUN apt-get update\
 	&& apt-get -y install curl php-fpm php-gd php-intl php-mbstring php-imagick php-mysql
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d
+COPY conf/config.sh /root
 RUN mkdir /run/php
 RUN mkdir -p /var/www/html/\
 	&& cd /var/www/html/\
@@ -13,7 +14,7 @@ RUN mkdir -p /var/www/html/\
 	&& cd wordpress\
 	&& cp wp-config-sample.php wp-config.php\
 	&& chown -R www-data:www-data /var/www/html/wordpress
-
-RUN service php7.4-fpm start
+# RUN service php7.4-fpm start
 EXPOSE 9000
+ENTRYPOINT [ "bash", "/root/config.sh" ]
 CMD /usr/sbin/php-fpm7.4 -F

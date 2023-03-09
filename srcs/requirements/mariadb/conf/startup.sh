@@ -8,7 +8,7 @@ mysql_install_db
 
 if [ -d "/var/lib/mysql/$WORDPRESSDB" ]
 then 
-	echo "Database already exists"
+	echo "$WORDPRESSDB already exists"
 else
 
 # Set root option so that connexion without root password is not possible
@@ -31,7 +31,7 @@ echo "GRANT ALL ON *.* TO 'root'@'%' IDENTIFIED BY '$ROOTPASSORD'; FLUSH PRIVILE
 echo "CREATE DATABASE IF NOT EXISTS $WORDPRESSDB; GRANT ALL ON $WORDPRESSDB.* TO '$WORDPRESSUSER'@'%' IDENTIFIED BY '$WORDPRESSPASSWORD'; FLUSH PRIVILEGES;" | mysql -u root
 
 #Import database in the mysql command line
-mysql -uroot -p$ROOTPASSORD $WORDPRESSDB < /usr/local/bin/wordpress.sql
+mysql -uroot -p$ROOTPASSORD $WORDPRESSDB < /usr/local/bin/setup_wordpress.sql
 
 fi
 
