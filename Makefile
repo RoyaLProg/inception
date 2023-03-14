@@ -1,8 +1,9 @@
 TARGET=srcs/docker-compose.yml
+
+all: build create start
+
 build:
 	docker compose -f $(TARGET) build
-
-all: build up
 
 up:
 	docker compose -f $(TARGET) up
@@ -19,6 +20,9 @@ clean:
 fclean: clean
 	docker rmi -f $$(docker images -aq)
 
+create:
+	docker compose -f $(TARGET) create
+
 re: fclean all
 
-.PHONY: all up re clean stop start fclean build
+.PHONY: all up re clean stop start fclean build create
