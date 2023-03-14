@@ -1,6 +1,6 @@
 TARGET=srcs/docker-compose.yml
 
-all: build create start
+all: mkdir build create start host
 
 build:
 	docker compose -f $(TARGET) build
@@ -17,7 +17,7 @@ stop:
 clean:
 	docker rm -vf $$(docker ps -aq)
 
-fclean: clean
+fclean: clean rmdir
 	docker rmi -f $$(docker images -aq)
 
 create:
@@ -25,4 +25,13 @@ create:
 
 re: fclean all
 
-.PHONY: all up re clean stop start fclean build create
+host:
+	sudo echo "127.0.0.1 ccambium.42.fr" > /etc/hosts
+
+mkdir:
+	mkdir -p $$HOME/data/wordpress $$HOME/data/mariadb
+
+rmdir:
+	rm -rf $$HOME/data/wordpress $$HOME/data/mariadb
+
+.PHONY: all up re clean stop start fclean build create host mkdir rmdir
