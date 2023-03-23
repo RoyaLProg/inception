@@ -9,6 +9,6 @@ wp config create --dbname=$WORDPRESSDB --dbuser=$WORDPRESSUSER --dbpass=$WORDPRE
 wp core install --url=ccambium.42.fr --title=inception --admin_user=$ADMINUSER --admin_password=$ADMINPASSWORD --admin_email=$ADMINEMAIL --skip-email --allow-root;
 wp user create $USER $USEREMAIL --role=author --user_pass=$USERPASS --allow-root;
 
-ls -la /usr/sbin/
+chown -R www-data:www-data /var/www/html
 echo "wp-config done !"
 exec "$@"

@@ -24,7 +24,6 @@ RUN mkdir -p /var/www/html/wordpress
 	# && rm latest.tar.gz\
 	# && cd wordpress\
 	# && cp wp-config-sample.php wp-config.php\
-	# && chown -R www-data:www-data /var/www/html/wordpress
 
 EXPOSE 9000
 WORKDIR /var/www/html/wordpress
